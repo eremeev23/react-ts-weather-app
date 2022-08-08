@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "react-app"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "jsx-quotes": ["warn", "prefer-double"]
+  }
+}

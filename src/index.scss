@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #DCD7C9;
+  background: linear-gradient(315deg, #1e2127, #23282e);
+}
+
+button {
+  padding: 2px 5px 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  img {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+ul {
+  list-style: none;
+}
