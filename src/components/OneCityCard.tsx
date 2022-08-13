@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { WeatherData } from '../types/data';
-import WindIcon from "./icons/WindIcon";
-import SettingsIcon from "./icons/SettingsIcon";
-import {OPEN_SETTINGS} from "../store/reducers/citiesSlice";
-import {useAppDispatch} from "../hooks/redux";
+import WindIcon from './icons/WindIcon';
+import SettingsIcon from './icons/SettingsIcon';
+import { OPEN_SETTINGS } from '../store/reducers/citiesSlice';
+import { useAppDispatch } from '../hooks/redux';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const CardWrapper = styled.div`
   width: 100%;
   max-width: 380px;
   background: linear-gradient(315deg, #1e2127, #23282e);
-  box-shadow: -5px -5px 25px #16181c, 5px 5px 25px #31383f;
+  box-shadow: -5px -5px 35px #16181c, 5px 5px 35px #282d33;
   border-radius: 50px;
 `;
 
@@ -59,7 +59,7 @@ const CardInfo = styled.div`
 const CardInfoBlock = styled.div`
   display: flex;
   align-items: center;
-  
+
   svg {
     margin-right: 5px;
     width: 20px;
@@ -71,7 +71,7 @@ const CardInfoBlockText = styled.span``;
 
 const OneCityCard: FC<WeatherData> = (cityData) => {
   const dispatch = useAppDispatch();
-  const openSettings = () => dispatch(OPEN_SETTINGS())
+  const openSettings = () => dispatch(OPEN_SETTINGS());
   const windDirections = (): string => {
     let direction = '';
 
@@ -105,7 +105,7 @@ const OneCityCard: FC<WeatherData> = (cityData) => {
     <CardWrapper>
       <CardHeader>
         <CityName>
-          { cityData.city }
+          {cityData.city}, {cityData.cityCountry}
         </CityName>
 
         <SettingsButton onClick={openSettings}>
@@ -113,40 +113,34 @@ const OneCityCard: FC<WeatherData> = (cityData) => {
         </SettingsButton>
       </CardHeader>
       <CardBody>
-        <WeatherIcon src={`https://openweathermap.org/img/wn/${cityData.icon}@2x.png`}/>
-        <WeatherTemp>
-          { cityData.temp }°C
-        </WeatherTemp>
+        <WeatherIcon
+          src={`https://openweathermap.org/img/wn/${cityData.icon}@2x.png`}
+        />
+        <WeatherTemp>{cityData.temp}°C</WeatherTemp>
       </CardBody>
       <CardFeelsLike>
-        Feels like { cityData.feels_like }°C. { weatherDescription }.
+        Feels like {cityData.feels_like}°C. {weatherDescription}.
       </CardFeelsLike>
 
       <CardInfo>
         <CardInfoBlock>
           <WindIcon />
           <CardInfoBlockText>
-            { cityData.wind }, { windDirections() }
+            {cityData.wind}, {windDirections()}
           </CardInfoBlockText>
         </CardInfoBlock>
         <CardInfoBlock>
-          <CardInfoBlockText>
-            { cityData.pressure } hPa
-          </CardInfoBlockText>
+          <CardInfoBlockText>{cityData.pressure} hPa</CardInfoBlockText>
+        </CardInfoBlock>
+        <CardInfoBlock>
+          <CardInfoBlockText>Humidity: {cityData.humidity}%</CardInfoBlockText>
+        </CardInfoBlock>
+        <CardInfoBlock>
+          <CardInfoBlockText>Dew point: 0°C</CardInfoBlockText>
         </CardInfoBlock>
         <CardInfoBlock>
           <CardInfoBlockText>
-            Humidity: { cityData.humidity }%
-          </CardInfoBlockText>
-        </CardInfoBlock>
-        <CardInfoBlock>
-          <CardInfoBlockText>
-            Dew point: 0°C
-          </CardInfoBlockText>
-        </CardInfoBlock>
-        <CardInfoBlock>
-          <CardInfoBlockText>
-            Visibility: { cityData.visibility }
+            Visibility: {cityData.visibility}
           </CardInfoBlockText>
         </CardInfoBlock>
       </CardInfo>

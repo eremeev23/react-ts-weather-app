@@ -8,6 +8,7 @@ import SettingsCard from "./components/SettingsCard";
 
 const Container = styled.div`
   min-height: 100vh;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +18,7 @@ const Container = styled.div`
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
-  const cities = useAppSelector((state) => state.citiesReducer.cities);
+  const cities: WeatherData[] = useAppSelector((state) => state.citiesReducer.cities);
   const settingsOpened = useAppSelector((state) => state.citiesReducer.settingsOpened);
   const geo = navigator.geolocation;
 // Loading our cities list from loc.storage or api
@@ -36,7 +37,8 @@ const App: FC = () => {
 
   const isSettingsOpened = () => {
     if (settingsOpened) {
-      return <SettingsCard />
+      // @ts-ignore
+      return <SettingsCard cities={cities} />
     } else {
       return (
         <>

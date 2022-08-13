@@ -28,7 +28,17 @@ const citiesSlice = createSlice({
   initialState,
   reducers: {
     OPEN_SETTINGS(state) {
-      state.settingsOpened = !state.settingsOpened
+      state.settingsOpened = !state.settingsOpened;
+    },
+
+    DELETE_CITY(state, action) {
+      state.cities.splice(action.payload, 1)
+      window.localStorage.setItem('weather_cities', JSON.stringify(state.cities));
+    },
+
+    REPLACE_CITIES(state, action) {
+      state.cities = action.payload;
+      window.localStorage.setItem('weather_cities', JSON.stringify(state.cities));
     }
   },
   extraReducers: (builder) => {
@@ -67,6 +77,6 @@ const citiesSlice = createSlice({
   },
 });
 
-export const { OPEN_SETTINGS } = citiesSlice.actions;
+export const { OPEN_SETTINGS, DELETE_CITY, REPLACE_CITIES } = citiesSlice.actions;
 
 export default citiesSlice.reducer;
